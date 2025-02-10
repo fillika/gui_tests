@@ -3,6 +3,7 @@
     "test": "jest --config ./jest.config.js"
   },
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "requirejs": "^2.3.7"
   }
 }

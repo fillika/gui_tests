@@ -1,18 +1,19 @@
-require("../initLoader");
+require("../init/main");
 
 loader.load("test/mock", () => {
-    
+    console.log("PASS::Mock loaded");
 });
 
-// const modules = [
-//     // "utils/regExpParser", Loader.Type.requirejs,
-//     "json/regExpGeneratorRules", Loader.Type.json,
-// ];
+const modules = [
+    "utils/regExpParser", Loader.Type.requirejs,
+    "json/regExpGeneratorRules", Loader.Type.json,
+];
 
-// loader.load("json/regExpGeneratorRules", Loader.Type.json, () => {
-//     const regExpRules = loader.getModule("json/regExpGeneratorRules");
-
-//     test('regExpRules is defined', () => {
-//         expect(regExpRules).not.toBe(undefined);
-//     });
-// });
+loader.loadBulk(modules, () => {
+    const regExp = loader.getAsset("json/regExpGeneratorRules");
+    const Parser = loader.getModule("utils/regExpParser");
+    if (regExp == undefined || Parser == undefined)
+        console.error("FAIL::RegExp rules not loaded");
+    else
+        console.log("PASS::Mock loaded", Parser);
+});

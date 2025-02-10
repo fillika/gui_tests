@@ -2,7 +2,8 @@ const path = require("path");
 const rootPath = path.join(__dirname, '../');
 const guiPath = path.join(rootPath, 'gui');
 const guiCodePath = path.join(guiPath, 'js');
-const loaderPath = path.join(guiCodePath, "external/loader/loader");
+const loaderPath = path.join(guiCodePath, "external/loader/loader.js");
+const requirejsPath = path.join(guiCodePath, 'require/main.js');
 
 module.exports = {
     paths: {
@@ -10,5 +11,6 @@ module.exports = {
         gui: guiPath,
         guiCode: guiCodePath,
         loader: loaderPath,
+        requirejs: requirejsPath,
     }
 }

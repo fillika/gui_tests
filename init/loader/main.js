@@ -14,7 +14,7 @@ class NewLoader extends Loader {
             callback = undefined;
         }
         if (!contentType) {
-            contentType = Type.js;
+            contentType = Loader.Type.js;
         }
         load.call(this,
             refinePath(path, contentType, this._baseUrl, this._typePaths, this._libs),

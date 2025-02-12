@@ -1,10 +1,13 @@
 
-let compareParams = (a, b) => false; // mock. Just in case
+let compareParams;
 
 beforeAll((done) => {
-    loader.load("utils/properties/compareParams", () => {
-        compareParams = loader.getModule("utils/properties/compareParams");
+    const modules = [
+        "utils/properties/compareParams",
+    ];
 
+    loader.loadBulk(modules, () => {
+        compareParams = loader.getModule("utils/properties/compareParams");
         done();
     });
 });

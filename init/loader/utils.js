@@ -279,6 +279,15 @@ function onError(/*String*/path, /*HTMLScriptElement*/element) {
     notifyProgressSubscribers.call(this);
 }
 
+function makeError(/*String*/path, /*HTMLScriptElement*/element) {
+    let error = this._errors[path];
+    if (error instanceof BasicError)
+        return error;
+
+    let loading = this._loadingFiles[path];
+    return new LoadError(path, loading.originalName);
+}
+
 function onModuleError(/*String*/path, /*HTMLScriptElement*/element) {
     if (!this._requireLoadedFiles[path]) {
         --this._loadingCount;
@@ -304,7 +313,6 @@ function cleanUp(/*String*/path, /*HTMLScriptElement*/element) {
     delete this._errors[path];
     switch (loading.contentType) {
         case Type.js:
-            element.target.remove();
             delete element.target.onload;
             delete element.target.onerror;
             break;
@@ -338,6 +346,26 @@ function notifyProgressSubscribers() {
     for (let i = 0; i < this._progressHandlers.length; ++i) {
         const handler = this._progressHandlers[i];
         handler(loaded, pending, loaded + pending);
+    }
+}
+
+class BasicError {
+    /**
+     * @param {String}  path         - path to the file that caused an error
+     * @param {String}  originalName - original name of the loading file
+     * */
+    constructor(path, originalName) {
+        this.path = path;
+        this.originalName = originalName;
+    }
+
+    get message() { return "Unknown error about file " + this.originalName + " (" + this.path + ")" };
+}
+
+class LoadError extends BasicError {
+    get message() {
+        return "Couldn't load file " + this.originalName +
+            " (" + this.path + ")";
     }
 }
 

@@ -1,6 +1,4 @@
-const { loader, Loader } = require("./loader");
-const reqjs = require("./requirejs");
+const { loader, Loader } = require("./loader/main");
 
 global.Loader = Loader;
 global.loader = loader;
-global.requirejs = reqjs;

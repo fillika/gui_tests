@@ -1,3 +1,4 @@
+const fs = require("fs");
 const requirejs = require("../requirejs");
 
 const Type = {
@@ -189,14 +190,16 @@ function executeLoad(/*String*/path, /*LoadingFile*/loadingFile) {
     switch (loadingFile.contentType) {
         case Type.js:
         case Type.json:
-        case Type.binary:
         case Type.text:
-        case Type.blob:
         case Type.css:
             getByNodeJSRequire(path, boundLoad, boundError);
             break;
         case Type.requirejs:
             requirejs([loadingFile.originalName], boundLoad, boundError, null, boundRequireScriptCheck);
+            break;
+        case Type.blob:
+        case Type.binary:
+            loadBinSync(path, boundLoad, boundError);
             break;
     }
 }
@@ -207,6 +210,21 @@ function getByNodeJSRequire(/*String*/path, /*Function*/callback, /*Function*/er
         const event = {
             target: {
                 response: module,
+            }
+        };
+        callback(event);
+    } catch (err) {
+        error();
+        console.error("Error loading module: " + err.message);
+    }
+}
+
+function loadBinSync(/*String*/path, /*Function*/callback, /*Function*/error) {
+    try {
+        const binBuffer = fs.readFileSync(path)
+        const event = {
+            target: {
+                response: binBuffer,
             }
         };
         callback(event);

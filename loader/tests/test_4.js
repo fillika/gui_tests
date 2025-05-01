@@ -16,7 +16,7 @@ function run() {
                 reject();
             }
             else {
-                console.log("PASS::test_4::New modules loaded (Button, Size)", Button, Size);
+                console.log("PASS::test_4::New modules loaded (Button, Size)");
                 resolve();
             }
         });

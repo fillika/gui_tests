@@ -1,13 +1,23 @@
 {
-  "scripts": {
-    "test": "jest --config ./jest.config.js"
-  },
-  "devDependencies": {
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "requirejs": "^2.3.7"
-  },
-  "dependencies": {
-    "jsdom": "^26.1.0"
-  }
+    "name": "gui_tests",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "vitest"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "vitest": "^3.1.2"
+    },
+    "dependencies": {
+        "jsdom": "^26.1.0",
+        "module-alias": "^2.2.3",
+        "requirejs": "^2.3.7"
+    },
+    "_moduleAliases": {
+        "@loader": "loader/main"
+    }
 }

@@ -1,14 +1,9 @@
-
 let compareParams;
+beforeAll(async () => {
+    const modules = ["utils/properties/compareParams"];
 
-beforeAll((done) => {
-    const modules = [
-        "utils/properties/compareParams",
-    ];
-
-    loader.loadBulk(modules, () => {
+    await loadBulk(modules, () => {
         compareParams = loader.getModule("utils/properties/compareParams");
-        done();
     });
 });
 

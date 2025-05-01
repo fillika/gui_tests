@@ -1,15 +1,13 @@
-let Button;
-beforeAll((done) => {
+let Button, Size;
+beforeAll(async () => {
     const modules = [
         "component/button",
         "utils/size",
     ];
 
-    loader.loadBulk(modules, () => {
+    await loadBulk(modules, () => {
         Button = loader.getModule("component/button");
         Size = loader.getModule("utils/size");
-
-        done();
     });
 });
 

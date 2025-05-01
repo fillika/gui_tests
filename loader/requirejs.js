@@ -1,7 +1,7 @@
 const fs = require("fs");
 const vm = require("vm");
 const requirejs = require("requirejs");
-const { paths } = require("../config");
+const { paths } = require("../loader_config");
 
 /**
  * Monkey-патчит requirejs для Node.js, чтобы модули с `(this)` внутри strict-режима

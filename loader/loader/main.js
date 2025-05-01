@@ -1,5 +1,5 @@
 
-const { paths } = require("../../config");
+const { paths } = require("../../loader_config");
 const Loader = require(paths.loader);
 const { refinePath, refineDependencies, loadedFileForBulk, load } = require("./utils");
 

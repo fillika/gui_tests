@@ -12,18 +12,16 @@ function createParser(ctor, regExps, defaultChars) {
 }
 
 let parser;
-beforeAll((done) => {
+beforeAll(async () => {
     const modules = [
         "utils/regExpParser", Loader.Type.requirejs,
         "json/regExpGeneratorRules", Loader.Type.json,
     ];
 
-    loader.loadBulk(modules, () => {
+    await loadBulk(modules, () => {
         const { regExps, defaultChars } = loader.getAsset("json/regExpGeneratorRules");
         const Parser = loader.getModule("utils/regExpParser");
         parser = createParser(Parser, regExps, defaultChars);
-
-        done();
     });
 });
 

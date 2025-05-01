@@ -37,6 +37,7 @@ function setupDom() {
 
     global.HTMLElement = dom.window.HTMLElement;
     global.SVGElement = dom.window.SVGElement;
+    global.SVGForeignObjectElement = dom.window.SVGForeignObjectElement || class SVGForeignObjectElement extends dom.window.SVGElement {};
     global.HTMLDivElement = dom.window.HTMLDivElement;
     global.Node = dom.window.Node;
     global.NodeList = dom.window.NodeList;

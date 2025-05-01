@@ -44,8 +44,10 @@ class NewLoader extends Loader {
     }
 }
 
-global.window = global;
 global.addEventListener = function () { };
+global.CanvasRenderingContext2D = {
+    prototype: {},
+};
 
 const loader = new NewLoader({
     maxParallelLoadings: 20,

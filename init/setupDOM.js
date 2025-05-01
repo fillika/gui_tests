@@ -1,0 +1,60 @@
+const { JSDOM } = require("jsdom");
+
+function setupDom() {
+    const dom = new JSDOM(`<!DOCTYPE html><html><body></body></html>`, {
+        url: "http://localhost/",
+    });
+
+    // Сохраняем оригинальные функции Node.js
+    const originalSetTimeout = global.setTimeout;
+    const originalClearTimeout = global.clearTimeout;
+    const originalSetInterval = global.setInterval;
+    const originalClearInterval = global.clearInterval;
+
+    global.window = dom.window;
+    global.document = dom.window.document;
+    global.navigator = dom.window.navigator;
+    global.XMLSerializer = dom.window.XMLSerializer;
+    global.DOMParser = dom.window.DOMParser;
+
+    // Используем оригинальные функции Node.js для предотвращения рекурсии
+    global.setTimeout = originalSetTimeout;
+    global.clearTimeout = originalClearTimeout;
+    global.setInterval = originalSetInterval;
+    global.clearInterval = originalClearInterval;
+
+    global.requestAnimationFrame = dom.window.requestAnimationFrame || ((cb) => originalSetTimeout(cb, 0));
+    global.cancelAnimationFrame = dom.window.cancelAnimationFrame || originalClearTimeout;
+
+    global.Event = dom.window.Event;
+    global.CustomEvent = dom.window.CustomEvent;
+    global.MouseEvent = dom.window.MouseEvent;
+    global.KeyboardEvent = dom.window.KeyboardEvent;
+    global.EventTarget = dom.window.EventTarget;
+
+    global.localStorage = dom.window.localStorage;
+    global.sessionStorage = dom.window.sessionStorage;
+
+    global.HTMLElement = dom.window.HTMLElement;
+    global.SVGElement = dom.window.SVGElement;
+    global.HTMLDivElement = dom.window.HTMLDivElement;
+    global.Node = dom.window.Node;
+    global.NodeList = dom.window.NodeList;
+    global.Element = dom.window.Element;
+    global.DocumentFragment = dom.window.DocumentFragment;
+
+    global.CSSStyleDeclaration = dom.window.CSSStyleDeclaration;
+
+    global.URL = dom.window.URL;
+    global.URLSearchParams = dom.window.URLSearchParams;
+
+    global.fetch = dom.window.fetch;
+    global.XMLHttpRequest = dom.window.XMLHttpRequest;
+
+    global.atob = dom.window.atob;
+    global.btoa = dom.window.btoa;
+
+    global.MutationObserver = dom.window.MutationObserver;
+}
+
+module.exports = setupDom;

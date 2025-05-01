@@ -1,4 +1,8 @@
+const setupDom = require("./setupDOM");
+setupDom();
 const { loader, Loader } = require("./loader/main");
 
-global.Loader = Loader;
+globalThis.Loader = Loader;
+globalThis.loader = loader;
 global.loader = loader;
+global.Loader = Loader;

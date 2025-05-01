@@ -340,6 +340,18 @@ function checkNextElement() {
     }
 }
 
+function checkContentType (/*Loader.Type*/original, /*Loader.Type*/current, /*String*/path) {
+    if (original !== current) {
+        const originalType = ReverseType[original];
+        const currentType = ReverseType[current];
+        console.warn("Loader error: file " + path +
+            " was originally requested as " + originalType +
+            " but next time it was requested as " + currentType +
+            " ignoring second request type and treating file as " + originalType
+        );
+    }
+}
+
 function notifyProgressSubscribers() {
     const pending = this.pendingFilesAmount;
     const loaded = this.loadedFilesAmount;

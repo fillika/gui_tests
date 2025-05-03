@@ -18,6 +18,19 @@
         },
     );
 
+    // todo: get correct v2 libs and tools
+    await loadBulk(
+        [
+            "providers/v2/factory", Loader.Type.requirejs,
+            "providers/v2/tools/print", Loader.Type.requirejs,
+        ], 
+        () => {
+        }, 
+        () => {
+            console.error("Failed to load dependencies");
+        },
+    );
+
     const loadFonts = () => {
         return new Promise((resolve, reject) => {
             // todo: add real fonts array

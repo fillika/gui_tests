@@ -1,18 +1,8 @@
-beforeAll(async () => {
-    const modules = [
-        "providers/v2/factory", Loader.Type.requirejs,
-        "providers/v2/tools/print", Loader.Type.requirejs,
-    ];
-
-    await loadBulk(modules, () => {
-    });
-});
-
 describe("Print loaded", () => {
     it("Print module loaded", () => {
-        expect(global.v2).toBeDefined();
-        expect(global.v2.tools).toBeDefined();
-        expect(global.v2.tools.print).toBeDefined();
+        expect(v2).toBeDefined();
+        expect(v2.tools).toBeDefined();
+        expect(v2.tools.print).toBeDefined();
     });
 });
 

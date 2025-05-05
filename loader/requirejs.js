@@ -4,16 +4,12 @@ const requirejs = require("requirejs");
 const { paths } = require("../loader_config");
 
 /**
- * Monkey-патчит requirejs для Node.js, чтобы модули с `(this)` внутри strict-режима
- * работали корректно — `this` будет равен `globalThis`.
+ * Monkey-patch requirejs for Node.js to make modules with `(this)` inside strict mode
+ * work correctly — `this` will be equal to `globalThis`.
  */
 function patchRequirejsForNode(verbose = true) {
-    const sandbox = {
-        console,
-        require: requirejs,
+    const sandbox = Object.assign(global.window, {
         process,
-        setTimeout,
-        clearTimeout,
         exports: {},
         module: { exports: {} },
         global: global,
@@ -21,8 +17,9 @@ function patchRequirejsForNode(verbose = true) {
         v2: Object.create(null),
         std: Object.create(null),
         define: requirejs.define,
+        require: requirejs,
         requirejs,
-    };
+    });
     vm.createContext(sandbox);
 
     requirejs.load = function (context, moduleName, url) {
@@ -44,12 +41,17 @@ function patchRequirejsForNode(verbose = true) {
             return;
         }
 
-        // Заменим `(this)` на `(globalThis)`
+        // Deleting `use strict` to prevent `this` from being `undefined` in strict mode
         let patchedCode = code
-            // .replace(/\(\s*this\s*\)/g, '(globalThis)')
-            .replace(/['"]use strict['"]/g, "");
+            .replace(/['"]use strict['"]\n/g, "")
 
-        // Добавляем глобавльные переменные в контекст
+        if (fullPath.includes("base64js.min")) {
+            // Patch base64js.min code to not use `exports` and `module`
+            patchedCode = patchedCode
+                .replace(`typeof exports==="object"&&typeof module!=="undefined"`, "false");
+        }
+
+        // Add global variables to the context
         patchedCode = `
             v2 = this.v2;
             std = this.std;

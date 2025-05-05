@@ -22,12 +22,15 @@ function run() {
                 reject();
             }
             if (fm.ready) {
-                console.error("FAIL::test_5::Fonts loaded");
+                console.error("SUCCESS::test_5::Fonts loaded");
                 resolve();
             } else {
-                console.error("FAIL::test_5::Fonts loaded");
+                console.error("SUCCESS::test_5::Fonts loaded");
                 fm.one("ready", resolve);
             }
+        }, () => {
+            console.error("FAIL::test_5::Failed to load test_5.js");
+            reject(new Error("Failed to load test_5.js"));
         });
     })
 }

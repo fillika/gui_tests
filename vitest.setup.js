@@ -1,3 +1,3 @@
-require("module-alias/register");
-require("./setup/loader_methods");
-require("./setup/globals");
+import init from "./loader/init";
+
+await init();

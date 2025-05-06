@@ -1,17 +1,3 @@
-beforeAll(async () => {
-    await loadBulk(
-        [
-            "providers/v2/factory", Loader.Type.requirejs,
-            "providers/v2/tools/print", Loader.Type.requirejs,
-        ], 
-        () => {
-        }, 
-        () => {
-            console.error("Failed to load dependencies");
-        },
-    );
-});
-
 describe("Print loaded", () => {
     it("Print module loaded", () => {
         expect(v2).toBeDefined();

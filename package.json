@@ -15,7 +15,6 @@
     },
     "dependencies": {
         "jsdom": "^26.1.0",
-        "module-alias": "^2.2.3",
         "requirejs": "^2.3.7"
     },
     "_moduleAliases": {

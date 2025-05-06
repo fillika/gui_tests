@@ -1,4 +1,5 @@
-(async () => {
+async function loadGlobalDeps() {
+    // note: Loading globals deps
     const deps = [
         "managers/themes/manager", 
         "component/visual",
@@ -15,21 +16,26 @@
         }, 
         () => {
             console.error("Failed to load dependencies");
+            throw new Error("Failed to load dependencies", deps);
         },
     );
 
     // todo: get correct v2 libs and tools
-    // await loadBulk(
-    //     [
-    //         "providers/v2/factory", Loader.Type.requirejs,
-    //         "providers/v2/tools/print", Loader.Type.requirejs,
-    //     ], 
-    //     () => {
-    //     }, 
-    //     () => {
-    //         console.error("Failed to load dependencies");
-    //     },
-    // );
+    await loadBulk(
+        [
+            "providers/v2/factory", Loader.Type.requirejs,
+            "providers/v2/tools/print", Loader.Type.requirejs,
+        ], 
+        () => {
+        }, 
+        () => {
+            console.error("Failed to load dependencies");
+            throw new Error("Failed to load dependencies", [
+                "providers/v2/factory", Loader.Type.requirejs,
+                "providers/v2/tools/print", Loader.Type.requirejs,
+            ]);
+        },
+    );
 
     const loadFonts = () => {
         return new Promise((resolve, reject) => {
@@ -51,4 +57,6 @@
         });
     }
     await loadFonts();
-})();
+}
+
+module.exports = loadGlobalDeps;

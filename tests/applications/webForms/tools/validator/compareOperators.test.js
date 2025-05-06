@@ -502,6 +502,70 @@ describe("Test 'greater' and 'greaterOrEqual' rule", () => {
             });
         });
     });
+
+    describe("Cases with no or one argument", () => {
+        let ruleName = "noArg";
+        describe("Case undefined", () => {
+            beforeEach(() => {
+                validatorRules.setRules(ruleName, [createRule("between", undefined)]);
+                validator.rules = validatorRules;
+            });
+            it("Pass numbers, strings", () => {
+                let result = validator.checkValid(5, [ruleName]);
+                expect(result.valid).toBe(false);
+                result = validator.checkValid("5", [ruleName]);
+                expect(result.valid).toBe(false);
+            });
+            it("Pass NaN, undefined, null", () => {
+                let result = validator.checkValid(NaN, [ruleName]);
+                expect(result.valid).toBe(false);
+                result = validator.checkValid(undefined, [ruleName]);
+                expect(result.valid).toBe(false);
+                result = validator.checkValid(null, [ruleName]);
+                expect(result.valid).toBe(false);
+            });
+        });
+        describe("Case 'no args with empty arrays", () => {
+            beforeEach(() => {
+                validatorRules.setRules(ruleName, [createRule("between", [])]);
+                validator.rules = validatorRules;
+            });
+            it("Pass numbers, strings", () => {
+                let result = validator.checkValid(5, [ruleName]);
+                expect(result.valid).toBe(false);
+                result = validator.checkValid("5", [ruleName]);
+                expect(result.valid).toBe(false);
+            });
+            it("Pass NaN, undefined, null", () => {
+                let result = validator.checkValid(NaN, [ruleName]);
+                expect(result.valid).toBe(false);
+                result = validator.checkValid(undefined, [ruleName]);
+                expect(result.valid).toBe(false);
+                result = validator.checkValid(null, [ruleName]);
+                expect(result.valid).toBe(false);
+            });
+        });
+        describe("Case 'one argument'", () => {
+           beforeEach(() => {
+                validatorRules.setRules(ruleName, [createRule("between", [2])]);
+                validator.rules = validatorRules;
+            });
+            it("Pass numbers, strings", () => {
+                let result = validator.checkValid(5, [ruleName]);
+                expect(result.valid).toBe(false);
+                result = validator.checkValid("5", [ruleName]);
+                expect(result.valid).toBe(false);
+            });
+            it("Pass NaN, undefined, null", () => {
+                let result = validator.checkValid(NaN, [ruleName]);
+                expect(result.valid).toBe(false);
+                result = validator.checkValid(undefined, [ruleName]);
+                expect(result.valid).toBe(false);
+                result = validator.checkValid(null, [ruleName]);
+                expect(result.valid).toBe(false);
+            }); 
+        })
+    });
 });
 
 function createRule(type, argument, argName, msg) {

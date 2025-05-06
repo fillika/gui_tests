@@ -263,13 +263,13 @@ describe("Test 'notIn' rule", () => {
             );
             validator.rules = validatorRules;
             let result = validator.checkValid(undefined, [ruleName]);
-            expect(result.valid).toBe(true);
+            expect(result.valid).toBe(false);
             result = validator.checkValid(null, [ruleName]);
-            expect(result.valid).toBe(true);
+            expect(result.valid).toBe(false);
             result = validator.checkValid(0, [ruleName]);
-            expect(result.valid).toBe(true);
+            expect(result.valid).toBe(false);
             result = validator.checkValid("daf", [ruleName]);
-            expect(result.valid).toBe(true);
+            expect(result.valid).toBe(false);
         });
         it("boolean", () => {
             validatorRules.setRules(ruleName, 
@@ -279,13 +279,13 @@ describe("Test 'notIn' rule", () => {
             );
             validator.rules = validatorRules;
             let result = validator.checkValid(false, [ruleName]);
-            expect(result.valid).toBe(true);
+            expect(result.valid).toBe(false);
             result = validator.checkValid(true, [ruleName]);
-            expect(result.valid).toBe(true);
+            expect(result.valid).toBe(false);
             result = validator.checkValid(null, [ruleName]);
-            expect(result.valid).toBe(true);
+            expect(result.valid).toBe(false);
             result = validator.checkValid(undefined, [ruleName]);
-            expect(result.valid).toBe(true);
+            expect(result.valid).toBe(false);
         });
         it("number", () => {
             validatorRules.setRules(ruleName, 
@@ -295,13 +295,13 @@ describe("Test 'notIn' rule", () => {
             );
             validator.rules = validatorRules;
             let result = validator.checkValid(123, [ruleName]);
-            expect(result.valid).toBe(true);
+            expect(result.valid).toBe(false);
             result = validator.checkValid(0, [ruleName]);
-            expect(result.valid).toBe(true);
+            expect(result.valid).toBe(false);
             result = validator.checkValid(null, [ruleName]);
-            expect(result.valid).toBe(true);
+            expect(result.valid).toBe(false);
             result = validator.checkValid(undefined, [ruleName]);
-            expect(result.valid).toBe(true);
+            expect(result.valid).toBe(false);
         });
     });
 });

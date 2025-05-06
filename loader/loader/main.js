@@ -1,8 +1,8 @@
-
+const getLoader = require("../utils/getLoader");
 const { paths } = require("../../loader_config");
-const Loader = require(paths.loader);
 const { refinePath, refineDependencies, loadedFileForBulk, load } = require("./utils");
 
+const Loader = getLoader();
 class NewLoader extends Loader {
     load(path, callback, error, contentType) {
         if (!(error instanceof Function) && contentType === undefined) {

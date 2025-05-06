@@ -6,14 +6,18 @@ This repository contains tests for the inint/gui project. Tests use "Vitest" fra
 For more information about Vitest, please refer to the [Vitest documentation](https://vitest.dev/).
 
 ## Before you start
-Make sure file loader.js in GUI contain this code:
-```javascript
-try {
-    if (module && module.exports) {
-        module.exports = Loader;
-    }
-} catch (e) {
-}
+Make sure you placed this repo next to gui repo. The structure should look like this:
+```
+.
+├── gui
+│   ├── ...
+│   └── ...
+└── gui_tests
+    ├── tests
+    │   ├── ...
+    │   └── ...
+    ├── package.json
+    └── vitest.config.ts
 ```
 
 ## Setup and run tests

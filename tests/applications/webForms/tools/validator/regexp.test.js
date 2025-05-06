@@ -83,6 +83,44 @@ describe("Test simple regexp rule", () => {
     });
 });
 
+describe("Test wrong regexps", () => {
+    let validatorRules, inputText, validator;
+    beforeEach(() => {
+        validatorRules = new Validator.Rules();
+        inputText = new InputText({
+            value: "",
+        });
+        validator = new Validator({
+            inspects: [
+                {
+                    ui: inputText,
+                    event: ["change"],
+                    parameterName: "value",
+                    rules: [],
+                    colorize: [1],
+                    popupMessages: false,
+                    triggerEvents: [1],
+                    uiAlert: inputText,
+                }
+            ],
+            rules: validatorRules,
+        });
+    });
+
+    it("Incorrect regexp", () => {
+        let ruleName = "rgxp";
+        validatorRules.setRules(ruleName, 
+            [
+                createRule("regex",  "//test/"),
+            ],
+        );
+        validator.rules = validatorRules;
+        let result = validator.checkValid("test", [ruleName]);
+        expect(result.valid).toBe(false);
+        expect(result.messages[0].includes("Invalid")).toBeFalsy();
+    });
+});
+
 function createRule(type, argument, argName, msg) {
     return new Validator.Rule({
         type,

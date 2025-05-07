@@ -15,7 +15,8 @@
     },
     "dependencies": {
         "jsdom": "^26.1.0",
-        "requirejs": "^2.3.7"
+        "requirejs": "^2.3.7",
+        "initi-loader": "file:./local_node_modules/initi-loader"
     },
     "_moduleAliases": {
         "@loader": "loader/main"

@@ -6,5 +6,6 @@ export default defineConfig({
         environment: "node",
         setupFiles: "./vitest.setup.js",
         isolate: false,
+        // cache: false,
     },
 });

@@ -1,6 +1,7 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import { init } from "initi-loader";
+import loadGlobalDeps from "./setup/loadGlobalDeps.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,4 +28,5 @@ const options = {
 
 if (globalThis.v2 === undefined) {
     await init(options);
+    await loadGlobalDeps();
 }

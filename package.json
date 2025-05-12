@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "test": "vitest",
-        "test:applications": "vitest tests/applications"
+        "test:applications": "vitest tests/applications",
+        "test:layout": "vitest tests/layout"
     },
     "keywords": [],
     "author": "",

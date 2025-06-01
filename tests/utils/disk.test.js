@@ -19,7 +19,7 @@ describe("Core connection is available", () => {
 });
 
 describe("Testing 'ls' command", () => {
-    it('Get files in root', async () => {
+    it("Get files in root", async () => {
         const files = await disk.ls("/");
         expect(files.length > 0).toBeTruthy();
     });

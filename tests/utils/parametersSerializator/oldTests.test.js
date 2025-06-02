@@ -344,16 +344,20 @@ beforeAll(async () => {
     ];
 });
 
-describe("Run all test in each block", () => {
+const testCasesNames = [
+    "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10",
+    "T11", "T12", "T13", "T14", "T15", "T16", "T17", "T18", "T19", "T20",
+    "T21", "T22", "T23", "T24", "T25", "T26", "T27", "T28",
+];
+describe.each(testCasesNames)("Run %s test", (name) => {
     it("Should serialize/deserialize correctly", async () => {
-        for (const { name, type, value, instanceOf } of testCases) {
-            const serialized = ParameterSerializator(type, value);
-            if (instanceOf) {
-                expect(serialized).toBeInstanceOf(instanceOf);
-            }
-
-            const deserialized = await ParameterDeserializatorAsync(type, serialized, name);
-            expect(deserialized).not.toBeInstanceOf(DeserializationError);
+        const { type, value, instanceOf } = testCases.find((t) => t.name == name);
+        const serialized = ParameterSerializator(type, value);
+        if (instanceOf) {
+            expect(serialized).toBeInstanceOf(instanceOf);
         }
+
+        const deserialized = await ParameterDeserializatorAsync(type, serialized, name);
+        expect(deserialized).not.toBeInstanceOf(DeserializationError);
     });
 });

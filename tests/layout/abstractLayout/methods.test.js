@@ -70,7 +70,7 @@ describe("flattenElements", () => {
             const elements = form.layout.flattenElements(undefined, true);
             expect(elements.length).toBe(1);
 
-            const innerCompElems = innerComponent.layout.flattenElements(undefined, true);
+            const innerCompElems = innerComponent.layout.flattenElements(undefined, { includeLayouts: true });
             expect(innerCompElems.length).toBe(6);
         });
     });
@@ -96,11 +96,11 @@ describe("flattenElements", () => {
         });
 
         it("Get elements using flatten without layouts", () => {
-            const elements = form.layout.flattenElements(undefined, false);
+            const elements = form.layout.flattenElements(undefined);
             expect(elements.length).toBe(5);
         });
         it("Get elements using flatten with layouts", () => {
-            const elements = form.layout.flattenElements(undefined, true);
+            const elements = form.layout.flattenElements(undefined, { includeLayouts: true });
             expect(elements.length).toBe(8);
         });
     });

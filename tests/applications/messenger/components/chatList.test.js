@@ -1,8 +1,8 @@
 let ChatList;
 beforeAll(async () => {
-    await loadBulk(["component/chat/components/chatList/chatsList"]);
+    await loadBulk(["component/messenger/components/chatList/chatsList"]);
 
-    ChatList = loader.getModule("component/chat/components/chatList/chatsList");
+    ChatList = loader.getModule("component/messenger/components/chatList/chatsList");
 });
 
 const CHAT_IDS = {
@@ -19,7 +19,7 @@ const initialItems = [
         title: "Viktor",
         text: "Notifications and other messages",
         unreadMessages: 0,
-        date: 1753797960104,
+        timestamp: 1753797960104,
         pinned: true,
     },
     {
@@ -27,28 +27,28 @@ const initialItems = [
         title: "Bender",
         text: "Hello from Bender! We glad to see you today! :)",
         unreadMessages: 0,
-        date: 1753797941787,
+        timestamp: 1753797941787,
         pinned: true,
     },
     {
         id: CHAT_IDS.USER_1,
         title: "User_1",
         text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: 1753797641787,
+        timestamp: 1753797641787,
         pinned: false,
     },
     {
         id: CHAT_IDS.USER_2,
         title: "User_2",
         text: "Hi! My name is...",
-        date: 1753797341787,
+        timestamp: 1753797341787,
         pinned: false,
     },
     {
         id: CHAT_IDS.USER_3,
         title: "User_3",
         text: "Did you know that 42 is the best number in the Universe?",
-        date: 1753797221787,
+        timestamp: 1753797221787,
         pinned: false,
     },
 ];
@@ -99,7 +99,7 @@ describe("Test correct sorting chat items", () => {
                 title: "INITI SUPPORT",
                 text: "Your ticket was registred",
                 unreadMessages: 100,
-                date: Date.now(),
+                timestamp: Date.now(),
             });
             const [viktorItem, benderItem, supportItem, user1, user2, user3] = getChatItems();
             expect(viktorItem.getId()).toBe(CHAT_IDS.VIKTOR);
@@ -112,7 +112,7 @@ describe("Test correct sorting chat items", () => {
             chatList.updateChat({
                 id: CHAT_IDS.USER_3,
                 text: "Your ticket was registred",
-                date: Date.now(),
+                timestamp: Date.now(),
             });
             const [viktorItem, benderItem, user3, user1, user2] = getChatItems();
             expect(viktorItem.getId()).toBe(CHAT_IDS.VIKTOR);
